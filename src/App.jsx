@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from './components/Header';
-import Footer from './components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
   Route,
   Routes
 } from "react-router-dom";
-import Profile from './Profile';
+import Profile from './components/Profile';
+import About from './components/About';
 
 class App extends React.Component {
   render() {
@@ -16,19 +16,14 @@ class App extends React.Component {
         <Router>
           <Header />
           <Routes>
-            <Route 
-              exact path="/"
-              element={<BestBooks />}
-            />
-            <Route 
-              path="/About"
-              element={<About />}
-            />
-            <Route path="/profile" 
+            <Route path="./components/Profile.jsx" 
             element={<Profile />} 
             />
+            <Route 
+              path="./components/About.jsx"
+              element={<About />}
+            />
           </Routes>
-          <Footer />
         </Router>
       </>
     )
