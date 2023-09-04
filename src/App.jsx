@@ -6,6 +6,7 @@ import {
   Route,
   Routes
 } from "react-router-dom";
+import SearchDates from './SearchDates';
 import Profile from './components/Profile';
 import About from './components/About';
 
@@ -16,8 +17,13 @@ class App extends React.Component {
         <Router>
           <Header />
           <Routes>
-            <Route path="./components/Profile.jsx" 
-            element={<Profile />} 
+            <Route 
+              exact path="/"
+              element={<SearchDates />}
+            />
+            <Route 
+              path="./components/Profile.jsx" 
+              element={<Profile />} 
             />
             <Route 
               path="./components/About.jsx"
