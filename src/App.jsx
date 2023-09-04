@@ -6,7 +6,7 @@ import {
   Route,
   Routes
 } from "react-router-dom";
-import SearchDates from './SearchDates';
+import SearchDates from './components/SearchDates';
 import Profile from './components/Profile';
 import About from './components/About';
 
