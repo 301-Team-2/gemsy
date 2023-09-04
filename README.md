@@ -33,7 +33,6 @@
 
 ![Lighthouse](insert img here)
 
-
 ### References
 
 - ChatGPT and other AI models were used to suggest, correct and explain code.
