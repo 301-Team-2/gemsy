@@ -13,7 +13,7 @@
 
 ## Wireframe
 
-![Gemsy Wireframe](insert img here)
+![Gemsy Wireframe](./ReadMePics/Wireframe.png)
 
 ## User Stories
 
@@ -24,6 +24,10 @@
 > Our domain modeling can be found in our invisionapp sketch located here:
 [Domain Modeling](insert link here)
 ![Domain Modeling Image](insert image here)
+
+## Database Modeling
+
+![Database Model](./ReadMePics/DatabaseModel.png)
 
 ## Lighthouse
 
