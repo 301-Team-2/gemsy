@@ -50,7 +50,7 @@ function About() {
           <img src="./proj/team/sydney.jpeg" alt="sydney" />
           <p>Sydney Mae Pagalan</p>
           <ul>
-            <li>Navy Vet & Medical Assistant -> Software Developer</li>
+            <li>Navy Vet & Medical Assistant - Software Developer</li>
             <li>Previous Experience: Work at Kaiser Permanente as an MA and served 6 years in the US Navy.</li>
             <li>I am deeply passionate about the intersection of the medical field and technology, as well as my love for gaming.</li>
           </ul>
