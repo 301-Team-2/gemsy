@@ -6,8 +6,9 @@ import {
   Route,
   Routes
 } from "react-router-dom";
-import Profile from './Profile';
 import SearchDates from './SearchDates';
+import Profile from './components/Profile';
+import About from './components/About';
 
 class App extends React.Component {
   render() {
@@ -21,14 +22,14 @@ class App extends React.Component {
               element={<SearchDates />}
             />
             <Route 
-              path="/About"
+              path="./components/Profile.jsx" 
+              element={<Profile />} 
+            />
+            <Route 
+              path="./components/About.jsx"
               element={<About />}
             />
-            <Route path="/profile" 
-            element={<Profile />} 
-            />
           </Routes>
-          <Footer />
         </Router>
       </>
     )
