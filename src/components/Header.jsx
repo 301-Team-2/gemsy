@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import AuthButtons from './auth/AuthButtons';
