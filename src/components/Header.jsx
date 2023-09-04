@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import AuthButtons from './auth/AuthButtons';
-import GemsyLogo from './src/assets/gemsy-logo-nobg.png'
+import GemsyLogo from './assets/GemsyLogo.png'
 
 function Header() {
   return (
