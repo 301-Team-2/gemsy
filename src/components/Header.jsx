@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import AuthButtons from './auth/AuthButtons'; // Import your AuthButtons component
+import AuthButtons from './auth/AuthButtons';
 import GemsyLogo from './src/assets/gemsy-logo-nobg.png'
 
 function Header() {
