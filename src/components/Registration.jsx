@@ -5,7 +5,6 @@ function Register() {
   const { loginWithRedirect } = useAuth0();
 
   const handleRegister = () => {
-    // Use Auth0's loginWithRedirect method to initiate the registration process.
     loginWithRedirect();
   };
 
