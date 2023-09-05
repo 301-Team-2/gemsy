@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function SearchDates() {
   // State for search form inputs
@@ -15,18 +16,12 @@ function SearchDates() {
 
   // Function to handle search form submission
   const handleSearch = async () => {
-    // Placeholder for API call to search for date ideas based on searchFormData
-    // Replace with actual API call
-    const apiResponse = await fetch('https://api.example.com/search-dates', {
-      method: 'POST',
-      body: JSON.stringify(searchFormData),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    const data = await apiResponse.json();
-    setSearchResults(data.results);
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/events`, searchFormData);
+      setSearchResults(response.data.results);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
   // Function to handle selecting a date idea
@@ -35,8 +30,13 @@ function SearchDates() {
   };
 
   // Function to save a search
-  const handleSaveSearch = () => {
-    setSavedSearches([...savedSearches, searchFormData]);
+  const handleSaveSearch = async() => {
+    try {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/events`, searchFormData);
+      setSavedSearches([...savedSearches, searchFormData]);
+    } catch (error) {
+      console.error('Error saving search:', error);
+    }
   };
 
   return (
