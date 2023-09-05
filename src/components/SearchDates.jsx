@@ -3,7 +3,6 @@ import openai from 'openai';
 import axios from 'axios';
 import mongoose from 'mongoose';
 
-
 function SearchDates() {
   // State for search form inputs
   const [searchFormData, setSearchFormData] = useState({ location: '', preferences: '' });
@@ -23,54 +22,16 @@ function SearchDates() {
   // State for user prompts
   const [prompt, setPrompt] = useState('');
 
+  // API URL
+  const apiURL = `${import.meta.env.VITE_BACKEND_URL}/events`;
+
   // Function to handle search form submission
   const handleSearch = async () => {
     try {
-      const apiUrl = `${import.meta.env.VITE_BACKEND_URL}/search-dates`;
-      // Placeholder for API call to search for date ideas based on searchFormData
-      // Replace with actual API call
-      const apiResponse = await fetch(apiUrl, {
-        method: 'POST',
-        body: JSON.stringify(searchFormData),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      const data = await apiResponse.json();
-      setSearchResults(data.results);
-
-      // Use the OpenAI GPT-3 API to get search suggestions
-      const userQuery = searchFormData.preferences;
-      const { Schema } = mongoose;
-  
-      // Define a schema for your documents (adjust this according to your document structure)
-      const documentSchema = new Schema({
-        content: String, // The content of the document
-      });
-  
-      // Create a model for your documents
-      const Document = mongoose.model('Document', documentSchema);
-  
-      // Fetch documents from MongoDB
-      const documents = await Document.find().lean(); // Use .lean() to get plain JavaScript objects
-  
-      // Extract the content of the documents into an array
-      const documentContents = documents.map((doc) => doc.content);
-  
-      // Use the OpenAI GPT-3 API to get search suggestions
-      const openaiResponse = await openai.search.suggestions({
-        documents: documentContents, // Use the content of the documents
-        query: userQuery,
-      });
-  
-      // Handle the OpenAI response and update the search results or suggestions UI as needed
-      const suggestions = openaiResponse.data.data;
-  
-      // Update the state with the search suggestions
-      setSearchSuggestions(suggestions);
+      const response = await axios.post(apiURL, searchFormData);
+      setSearchResults(response.data.results);
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error fetching data:', error);
     }
   };
 
@@ -80,8 +41,13 @@ function SearchDates() {
   };
 
   // Function to save a search
-  const handleSaveSearch = () => {
-    setSavedSearches([...savedSearches, searchFormData]);
+  const handleSaveSearch = async () => {
+    try {
+      await axios.post(apiURL, searchFormData);
+      setSavedSearches([...savedSearches, searchFormData]);
+    } catch (error) {
+      console.error('Error saving search:', error);
+    }
   };
 
   // Function to handle generating suggestions based on user prompts
@@ -124,7 +90,6 @@ function SearchDates() {
           'Authorization': `Bearer ${yelpApiKey}`,
         },
       });
-      
 
       const suggestions = yelpResponse.data.businesses;
 
@@ -189,29 +154,4 @@ function SearchDates() {
       </div>
 
       {/* Prompt input and button */}
-      <div>
-        <label>Ask for suggestions:</label>
-        <input
-          type="text"
-          placeholder="Ask for suggestions..."
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-        />
-        <button onClick={handlePromptSubmit}>Get Suggestions</button>
-      </div>
-
-      <div>
-        {/* Display saved searches */}
-        <h2>Saved Searches</h2>
-        {savedSearches.map((search, index) => (
-          <div key={index}>
-            <p>Location: {search.location}</p>
-            <p>Preferences: {search.preferences}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-export default SearchDates;
+      <div
