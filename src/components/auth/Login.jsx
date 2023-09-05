@@ -6,8 +6,8 @@ function Login() {
 
   return (
     <div>
-      <h2>Login to Gemsy</h2>
-      <button onClick={() => loginWithRedirect()}>Login with Auth0</button>
+      {/* <h2>Login to Gemsy</h2> */}
+      <button onClick={() => loginWithRedirect()}>Login to Gemsy</button>
     </div>
   );
 }

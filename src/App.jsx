@@ -22,11 +22,11 @@ class App extends React.Component {
               element={<SearchDates />}
             />
             <Route 
-              path="./components/Profile.jsx" 
+              path="/profile"
               element={<Profile />} 
             />
             <Route 
-              path="./components/About.jsx"
+              path="/about"
               element={<About />}
             />
           </Routes>
