@@ -141,10 +141,10 @@ function SearchDates() {
 
       {/* Prompt input and button */}
       <div>
-        <label>Ask Us:</label>
+        <label>Ask for suggestions:</label>
         <input
           type="text"
-          placeholder="Ask for suggestions..."
+          placeholder="Type here..."
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
         />
@@ -166,3 +166,4 @@ function SearchDates() {
 }
 
 export default SearchDates;
+
