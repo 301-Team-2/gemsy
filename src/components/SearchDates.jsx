@@ -154,4 +154,30 @@ function SearchDates() {
       </div>
 
       {/* Prompt input and button */}
-      <div
+      <div>
+        <label>Ask for suggestions:</label>
+        <input
+          type="text"
+          placeholder="Ask for suggestions..."
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+        />
+        <button onClick={handlePromptSubmit}>Get Suggestions</button>
+      </div>
+
+      <div>
+        {/* Display saved searches */}
+        <h2>Saved Searches</h2>
+        {savedSearches.map((search, index) => (
+          <div key={index}>
+            <p>Location: {search.location}</p>
+            <p>Preferences: {search.preferences}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default SearchDates;
+
