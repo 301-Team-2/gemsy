@@ -1,0 +1,97 @@
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+  color: #e3d0e0;
+  background-color: rgb(33, 37, 41);
+}
+
+html {
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  color: #e3d0e0;
+  background-color: rgb(33, 37, 41);
+}
+
+body {
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  color: #e3d0e0;
+  background-color: rgb(33, 37, 41);
+  place-items: center;
+}
+
+/* header styles */
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 36px;
+  margin-bottom: 5px;
+}
+
+nav-item {
+  display: flex;
+  flex-direction: row;
+}
+
+
+.text-icon {
+  color: rgb(33, 37, 41);
+}
+
+.mr-auto {
+  display: flex;
+}
+
+span.navbar-brand {
+  display: flex;
+}
+
+nav {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: rgb(231, 202, 167);
+}
+
+/* main styles */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+
+/* img styles */
+img.about-pic {
+  width: 300px;
+  height: 300px;
+  align-self: center;
+}
+
+img.gemsy-logo {
+  width: 40px;
+  height: 40px;
+}
+
+.restaurant-img {
+  width: 300px;
+  height: 300px;
+  align-self: center;
+}
+
+.event-img {
+  width: 300px;
+  height: 300px;
+  align-self: center;
+}
+
+button {
+  background-color: rgb(33, 37, 41);
+  color: #e3d0e0;
+
+}
