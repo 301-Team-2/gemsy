@@ -32,6 +32,11 @@ h1 {
   margin-bottom: 5px;
 }
 
+nav-item {
+  display: flex;
+  flex-direction: row;
+}
+
 
 .text-icon {
   color: rgb(33, 37, 41);
@@ -71,6 +76,18 @@ img.about-pic {
 img.gemsy-logo {
   width: 40px;
   height: 40px;
+}
+
+.restaurant-img {
+  width: 300px;
+  height: 300px;
+  align-self: center;
+}
+
+.event-img {
+  width: 300px;
+  height: 300px;
+  align-self: center;
 }
 
 button {
