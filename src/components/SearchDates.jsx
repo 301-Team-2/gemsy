@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import openai from 'openai';
 import axios from 'axios';
+import mongoose from 'mongoose';
 
 function SearchDates() {
   // State for search form inputs
@@ -14,10 +16,19 @@ function SearchDates() {
   // State for saved searches
   const [savedSearches, setSavedSearches] = useState([]);
 
+  // State for search suggestions
+  const [searchSuggestions, setSearchSuggestions] = useState([]);
+
+  // State for user prompts
+  const [prompt, setPrompt] = useState('');
+
+  // API URL
+  const apiURL = `${import.meta.env.VITE_BACKEND_URL}/events`;
+
   // Function to handle search form submission
   const handleSearch = async () => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/events`, searchFormData);
+      const response = await axios.post(apiURL, searchFormData);
       setSearchResults(response.data.results);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -30,12 +41,62 @@ function SearchDates() {
   };
 
   // Function to save a search
-  const handleSaveSearch = async() => {
+  const handleSaveSearch = async () => {
     try {
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/events`, searchFormData);
+      await axios.post(apiURL, searchFormData);
       setSavedSearches([...savedSearches, searchFormData]);
     } catch (error) {
       console.error('Error saving search:', error);
+    }
+  };
+
+  // Function to handle generating suggestions based on user prompts
+  const handlePromptSubmit = async () => {
+    try {
+      if (prompt.trim() !== '') {
+        const recommendations = await getAIRecommendations(prompt);
+        setSearchSuggestions(recommendations);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  // Function to send prompts to GPT-3 and get suggestions
+  const getAIRecommendations = async (userPrompt) => {
+    try {
+      const openaiApiKey = import.meta.env.OPENAI_API_KEY;
+
+      const gptResponse = await axios.post('https://api.openai.com/v1/engines/davinci-codex/completions', {
+        prompt: userPrompt,
+        max_tokens: 50,
+      }, {
+        headers: {
+          'Authorization': `Bearer ${openaiApiKey}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const generatedText = gptResponse.data.choices[0].text;
+
+      const yelpApiKey = import.meta.env.YELP_API_KEY;
+
+      const yelpResponse = await axios.get('https://api.yelp.com/v3/businesses/search', {
+        params: {
+          location: searchFormData.location,
+          term: generatedText,
+        },
+        headers: {
+          'Authorization': `Bearer ${yelpApiKey}`,
+        },
+      });
+
+      const suggestions = yelpResponse.data.businesses;
+
+      return suggestions;
+    } catch (error) {
+      console.error('Error:', error);
+      return [];
     }
   };
 
@@ -84,18 +145,13 @@ function SearchDates() {
       )}
 
       <div>
-        {/* Display saved searches */}
-        <h2>Saved Searches</h2>
-        {savedSearches.map((search, index) => (
-          <div key={index}>
-            <p>Location: {search.location}</p>
-            <p>Preferences: {search.preferences}</p>
-          </div>
-        ))}
+        <h2>Search Suggestions:</h2>
+        <ul>
+          {searchSuggestions.map((suggestion, index) => (
+            <li key={index}>{suggestion}</li>
+          ))}
+        </ul>
       </div>
-    </div>
-  );
-}
 
-export default SearchDates;
-
+      {/* Prompt input and button */}
+      <div
