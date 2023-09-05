@@ -1,42 +1,80 @@
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
+  color: #e3d0e0;
+  background-color: rgb(33, 37, 41);
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+html {
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  color: #e3d0e0;
+  background-color: rgb(33, 37, 41);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  color: #e3d0e0;
+  background-color: rgb(33, 37, 41);
+  place-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* header styles */
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 36px;
+  margin-bottom: 5px;
 }
 
-.card {
-  padding: 2em;
+
+.text-icon {
+  color: rgb(33, 37, 41);
 }
 
-.read-the-docs {
-  color: #888;
+.mr-auto {
+  display: flex;
+}
+
+span.navbar-brand {
+  display: flex;
+}
+
+nav {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: rgb(231, 202, 167);
+}
+
+/* main styles */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+
+/* img styles */
+img.about-pic {
+  width: 300px;
+  height: 300px;
+  align-self: center;
+}
+
+img.gemsy-logo {
+  width: 40px;
+  height: 40px;
+}
+
+button {
+  background-color: rgb(33, 37, 41);
+  color: #e3d0e0;
+
 }
