@@ -55,7 +55,7 @@ function About() {
             <li>I am deeply passionate about the intersection of the medical field and technology, as well as my love for gaming.</li>
           </ul>
           <div>
-            <a href="https://github.com/sfpagalan" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://github.com/sfpagalan" target="_blank" rel="noopener noreferrer">GitHub</a><br />
             <a href="https://www.linkedin.com/in/sfpagalan/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
         </div>

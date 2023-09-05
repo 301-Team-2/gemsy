@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import openai from 'openai';
 import axios from 'axios';
-import mongoose from 'mongoose';
 
 function SearchDates() {
   // State for search form inputs
@@ -22,16 +20,24 @@ function SearchDates() {
   // State for user prompts
   const [prompt, setPrompt] = useState('');
 
-  // API URL
-  const apiURL = `${import.meta.env.VITE_BACKEND_URL}/events`;
-
   // Function to handle search form submission
   const handleSearch = async () => {
     try {
-      const response = await axios.post(apiURL, searchFormData);
-      setSearchResults(response.data.results);
+      const apiUrl = `${import.meta.env.VITE_BACKEND_URL}/events`;
+      // Placeholder for API call to search for date ideas based on searchFormData
+      // Replace with actual API call
+      const apiResponse = await fetch(apiUrl, {
+        method: 'POST',
+        body: JSON.stringify(searchFormData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const data = await apiResponse.json();
+      setSearchResults(data.results);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error:', error);
     }
   };
 
@@ -41,12 +47,31 @@ function SearchDates() {
   };
 
   // Function to save a search
-  const handleSaveSearch = async () => {
+  const handleSaveSearch = () => {
+    setSavedSearches([...savedSearches, searchFormData]);
+  };
+
+  // Function to call the backend API for Yelp suggestions
+  const getAIRecommendations = async (userPrompt) => {
     try {
-      await axios.post(apiURL, searchFormData);
-      setSavedSearches([...savedSearches, searchFormData]);
+      const openaiApiKey = import.meta.env.OPENAI_API_KEY;
+
+      // Make a request to your backend API endpoint
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/yelp-businesses`, {
+        params: {
+          location: searchFormData.location,
+          term: userPrompt, // Pass the user's input as the search term
+        },
+        headers: {
+          'Authorization': `Bearer ${openaiApiKey}`,
+        },
+      });
+
+      const suggestions = response.data;
+      setSearchSuggestions(suggestions);
     } catch (error) {
-      console.error('Error saving search:', error);
+      console.error('Error:', error);
+      setSearchSuggestions([]);
     }
   };
 
@@ -54,49 +79,10 @@ function SearchDates() {
   const handlePromptSubmit = async () => {
     try {
       if (prompt.trim() !== '') {
-        const recommendations = await getAIRecommendations(prompt);
-        setSearchSuggestions(recommendations);
+        await getAIRecommendations(prompt);
       }
     } catch (error) {
       console.error('Error:', error);
-    }
-  };
-
-  // Function to send prompts to GPT-3 and get suggestions
-  const getAIRecommendations = async (userPrompt) => {
-    try {
-      const openaiApiKey = import.meta.env.OPENAI_API_KEY;
-
-      const gptResponse = await axios.post('https://api.openai.com/v1/engines/davinci-codex/completions', {
-        prompt: userPrompt,
-        max_tokens: 50,
-      }, {
-        headers: {
-          'Authorization': `Bearer ${openaiApiKey}`,
-          'Content-Type': 'application/json',
-        },
-      });
-
-      const generatedText = gptResponse.data.choices[0].text;
-
-      const yelpApiKey = import.meta.env.YELP_API_KEY;
-
-      const yelpResponse = await axios.get('https://api.yelp.com/v3/businesses/search', {
-        params: {
-          location: searchFormData.location,
-          term: generatedText,
-        },
-        headers: {
-          'Authorization': `Bearer ${yelpApiKey}`,
-        },
-      });
-
-      const suggestions = yelpResponse.data.businesses;
-
-      return suggestions;
-    } catch (error) {
-      console.error('Error:', error);
-      return [];
     }
   };
 
@@ -158,7 +144,7 @@ function SearchDates() {
         <label>Ask for suggestions:</label>
         <input
           type="text"
-          placeholder="Ask for suggestions..."
+          placeholder="Type here..."
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
         />
