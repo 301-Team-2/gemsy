@@ -1,93 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import { useLocationContext } from "./LocationContext";
+
 
 function SearchDates() {
   // State for search form inputs
-  const [searchFormData, setSearchFormData] = useState({ location: '', preferences: '' });
+  const [searchFormData, setSearchFormData] = useState({ location: '' });
 
   // State for search results
-  const [searchResults, setSearchResults] = useState([]);
+  const [restaurantResults, setRestaurantResults] = useState([]);
+  const [eventResults, setEventResults] = useState([]);
 
-  // State for selected date idea details
-  const [selectedDateIdea, setSelectedDateIdea] = useState(null);
+  // State to control the visibility of search results
+  const [showResults, setShowResults] = useState(false);
 
-  // State for saved searches
-  const [savedSearches, setSavedSearches] = useState([]);
-
-  // State for search suggestions
-  const [searchSuggestions, setSearchSuggestions] = useState([]);
-
-  // State for user prompts
-  const [prompt, setPrompt] = useState('');
+  // Access the addLocation function from the context
+  const { addLocation } = useLocationContext();
 
   // Function to handle search form submission
   const handleSearch = async () => {
     try {
-      const apiUrl = `${import.meta.env.VITE_BACKEND_URL}/events`;
-      // Placeholder for API call to search for date ideas based on searchFormData
-      // Replace with actual API call
-      const apiResponse = await fetch(apiUrl, {
-        method: 'POST',
-        body: JSON.stringify(searchFormData),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const restaurantApiUrl = `${import.meta.env.VITE_BACKEND_URL}/restaurants`;
+      const eventApiUrl = `${import.meta.env.VITE_BACKEND_URL}/events`; // Use the endpoint for events
 
-      const data = await apiResponse.json();
-      setSearchResults(data.results);
+      const [restaurantResponse, eventResponse] = await Promise.all([
+        axios.get(restaurantApiUrl, {
+          params: {
+            searchQuery: searchFormData.location,
+          },
+        }),
+        axios.get(eventApiUrl, {
+          params: {
+            searchQuery: searchFormData.location,
+          },
+        }),
+      ]);
+
+      const restaurantData = restaurantResponse.data;
+      const eventData = eventResponse.data;
+
+      setRestaurantResults(restaurantData);
+      setEventResults(eventData);
+
+      // Show the results
+      setShowResults(true);
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
-  // Function to handle selecting a date idea
-  const handleSelectDateIdea = (dateIdea) => {
-    setSelectedDateIdea(dateIdea);
-  };
-
-  // Function to save a search
-  const handleSaveSearch = () => {
-    setSavedSearches([...savedSearches, searchFormData]);
-  };
-
-  // Function to call the backend API for Yelp suggestions
-  const getAIRecommendations = async (userPrompt) => {
-    try {
-      const openaiApiKey = import.meta.env.OPENAI_API_KEY;
-
-      // Make a request to your backend API endpoint
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/yelp-businesses`, {
-        params: {
-          location: searchFormData.location,
-          term: userPrompt, // Pass the user's input as the search term
-        },
-        headers: {
-          'Authorization': `Bearer ${openaiApiKey}`,
-        },
-      });
-
-      const suggestions = response.data;
-      setSearchSuggestions(suggestions);
-    } catch (error) {
-      console.error('Error:', error);
-      setSearchSuggestions([]);
-    }
-  };
-
-  // Function to handle generating suggestions based on user prompts
-  const handlePromptSubmit = async () => {
-    try {
-      if (prompt.trim() !== '') {
-        await getAIRecommendations(prompt);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
+  // Function to handle saving a location
+  const handleSaveLocation = (location) => {
+    addLocation(location); // Use the addLocation function from the context
   };
 
   return (
-    <div>
+    <div className='search-bar'>
       <h2>Search for Date Ideas</h2>
       <div>
         <label>Location:</label>
@@ -95,75 +63,45 @@ function SearchDates() {
           type="text"
           placeholder="Enter location"
           value={searchFormData.location}
-          onChange={(e) => setSearchFormData({ ...searchFormData, location: e.target.value })}
+          onChange={(e) => setSearchFormData({ location: e.target.value })}
         />
+        <button className='search-btn' onClick={handleSearch}>Search</button>
       </div>
-      <div>
-        <label>Preferences:</label>
-        <input
-          type="text"
-          placeholder="Enter preferences"
-          value={searchFormData.preferences}
-          onChange={(e) => setSearchFormData({ ...searchFormData, preferences: e.target.value })}
-        />
-      </div>
-      <button onClick={handleSearch}>Search</button>
 
-      <div>
-        {/* Display search results */}
-        {searchResults.map((dateIdea) => (
-          <div key={dateIdea.id}>
-            <h3>{dateIdea.title}</h3>
-            <p>{dateIdea.description}</p>
-            <button onClick={() => handleSelectDateIdea(dateIdea)}>View Details</button>
+      {showResults && (
+        <>
+          <div className='show-restaurants'>
+            {/* Display restaurant search results */}
+            <h2>Restaurants</h2>
+            {restaurantResults.map((restaurant, index) => (
+              <div key={index}>
+                <h3><a href={restaurant.url} target="_blank" rel="noopener noreferrer">{restaurant.name}</a></h3>
+                <img src={restaurant.image_url} className="restaurant-img" alt="restaurant-img" />
+                <p>Rating: {restaurant.rating}</p>
+                <p>Price: {restaurant.price}</p>
+                <p>Location:{restaurant.location}</p>
+                <button onClick={() => handleSaveLocation(restaurant.location)}>Save Location</button>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-
-      {selectedDateIdea && (
-        <div>
-          {/* Display selected date idea details */}
-          <h2>Date Idea Details</h2>
-          <h3>{selectedDateIdea.title}</h3>
-          <p>{selectedDateIdea.description}</p>
-          <button onClick={handleSaveSearch}>Save Search</button>
-        </div>
+          <div className='show-events'>
+            {/* Display event search results */}
+            <h2>Events</h2>
+            {eventResults.map((event, index) => (
+              <div key={index}>
+                <h3><a href={event.event_site_url} target="_blank" rel="noopener noreferrer">{event.name}</a></h3>
+                <img src={event.image_url} className="event-img" alt="event-img" />
+                <p>Description: {event.description}</p>
+                <p>Start Time: {event.time_start}</p>
+                <p>End Time: {event.time_end}</p>
+                <button onClick={() => handleSaveLocation(event.location)}>Save Location</button>
+              </div>
+            ))}
+          </div>
+        </>
       )}
-
-      <div>
-        <h2>Search Suggestions:</h2>
-        <ul>
-          {searchSuggestions.map((suggestion, index) => (
-            <li key={index}>{suggestion}</li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Prompt input and button */}
-      <div>
-        <label>Ask for suggestions:</label>
-        <input
-          type="text"
-          placeholder="Type here..."
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-        />
-        <button onClick={handlePromptSubmit}>Get Suggestions</button>
-      </div>
-
-      <div>
-        {/* Display saved searches */}
-        <h2>Saved Searches</h2>
-        {savedSearches.map((search, index) => (
-          <div key={index}>
-            <p>Location: {search.location}</p>
-            <p>Preferences: {search.preferences}</p>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
 
 export default SearchDates;
-

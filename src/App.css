@@ -33,16 +33,9 @@ h1 {
 }
 
 
+
 .text-icon {
   color: rgb(33, 37, 41);
-}
-
-.mr-auto {
-  display: flex;
-}
-
-span.navbar-brand {
-  display: flex;
 }
 
 nav {
@@ -51,6 +44,26 @@ nav {
   margin-bottom: 20px;
   background-color: rgb(231, 202, 167);
 }
+
+div.navbar-nav {
+  flex-direction: row;
+  
+}
+
+.nav-item {
+  margin: 5px;
+}
+
+span.navbar-brand {
+  display: flex;
+}
+
+p.text-icon {
+  margin: 0;
+  margin-top: 3px;
+  
+}
+
 
 /* main styles */
 main {
@@ -71,6 +84,18 @@ img.about-pic {
 img.gemsy-logo {
   width: 40px;
   height: 40px;
+}
+
+.restaurant-img {
+  width: 300px;
+  height: 300px;
+  align-self: center;
+}
+
+.event-img {
+  width: 300px;
+  height: 300px;
+  align-self: center;
 }
 
 button {
