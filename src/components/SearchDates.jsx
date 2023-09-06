@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useLocationContext } from "./LocationContext";
+import { useLocationContext } from "./LocationContext"; // Use relative import
 
 
 function SearchDates() {
@@ -10,9 +10,6 @@ function SearchDates() {
   // State for search results
   const [restaurantResults, setRestaurantResults] = useState([]);
   const [eventResults, setEventResults] = useState([]);
-
-  // State to control the visibility of search results
-  const [showResults, setShowResults] = useState(false);
 
   // Access the addLocation function from the context
   const { addLocation } = useLocationContext();
@@ -41,9 +38,6 @@ function SearchDates() {
 
       setRestaurantResults(restaurantData);
       setEventResults(eventData);
-
-      // Show the results
-      setShowResults(true);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -55,7 +49,7 @@ function SearchDates() {
   };
 
   return (
-    <div className='search-bar'>
+    <div>
       <h2>Search for Date Ideas</h2>
       <div>
         <label>Location:</label>
@@ -65,41 +59,39 @@ function SearchDates() {
           value={searchFormData.location}
           onChange={(e) => setSearchFormData({ location: e.target.value })}
         />
-        <button className='search-btn' onClick={handleSearch}>Search</button>
       </div>
 
-      {showResults && (
-        <>
-          <div className='show-restaurants'>
-            {/* Display restaurant search results */}
-            <h2>Restaurants</h2>
-            {restaurantResults.map((restaurant, index) => (
-              <div key={index}>
-                <h3><a href={restaurant.url} target="_blank" rel="noopener noreferrer">{restaurant.name}</a></h3>
-                <img src={restaurant.image_url} className="restaurant-img" alt="restaurant-img" />
-                <p>Rating: {restaurant.rating}</p>
-                <p>Price: {restaurant.price}</p>
-                <p>Location:{restaurant.location}</p>
-                <button onClick={() => handleSaveLocation(restaurant.location)}>Save Location</button>
-              </div>
-            ))}
+      <button onClick={handleSearch}>Search</button>
+
+      <div>
+        {/* Display restaurant search results */}
+        <h2>Restaurants</h2>
+        {restaurantResults.map((restaurant, index) => (
+          <div key={index}>
+            <h3><a href={restaurant.url} target="_blank" rel="noopener noreferrer">{restaurant.name}</a></h3>
+            <img src={restaurant.image_url} className="restaurant-img" alt="restaurant-img" />
+            <p>Rating: {restaurant.rating}</p>
+            <p>Price: {restaurant.price}</p>
+            <p>Location:{restaurant.location}</p>
+            <button onClick={() => handleSaveLocation(restaurant.location)}>Save Location</button>
           </div>
-          <div className='show-events'>
-            {/* Display event search results */}
-            <h2>Events</h2>
-            {eventResults.map((event, index) => (
-              <div key={index}>
-                <h3><a href={event.event_site_url} target="_blank" rel="noopener noreferrer">{event.name}</a></h3>
-                <img src={event.image_url} className="event-img" alt="event-img" />
-                <p>Description: {event.description}</p>
-                <p>Start Time: {event.time_start}</p>
-                <p>End Time: {event.time_end}</p>
-                <button onClick={() => handleSaveLocation(event.location)}>Save Location</button>
-              </div>
-            ))}
+        ))}
+      </div>
+
+      <div>
+        {/* Display event search results */}
+        <h2>Events</h2>
+        {eventResults.map((event, index) => (
+          <div key={index}>
+            <h3><a href={event.event_site_url} target="_blank" rel="noopener noreferrer">{event.name}</a></h3>
+            <img src={event.image_url} className="event-img" alt="event-img" />
+            <p>Description: {event.description}</p>
+            <p>Start Time: {event.time_start}</p>
+            <p>End Time: {event.time_end}</p>
+            <button onClick={() => handleSaveLocation(event.location)}>Save Location</button>
           </div>
-        </>
-      )}
+        ))}
+      </div>
     </div>
   );
 }
