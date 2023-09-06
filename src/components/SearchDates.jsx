@@ -60,6 +60,7 @@ function SearchDates() {
       <div>
         <label>Location:</label>
         <input
+          className='location-input'
           type="text"
           placeholder="Enter location"
           value={searchFormData.location}
@@ -80,7 +81,7 @@ function SearchDates() {
                 <p>Rating: {restaurant.rating}</p>
                 <p>Price: {restaurant.price}</p>
                 <p>Location:{restaurant.location}</p>
-                <button onClick={() => handleSaveLocation(restaurant.location)}>Save Location</button>
+                <button className='search-btn' onClick={() => handleSaveLocation(restaurant.location)}>Save Location</button>
               </div>
             ))}
           </div>
