@@ -21,7 +21,6 @@ function Header() {
       </Navbar.Brand>
       <Nav className="mr-auto">
         <NavItem><Link to="/" className="nav-link">Home</Link></NavItem>
-        <NavItem><Link to="/search" className="nav-link">Searches</Link></NavItem>
         <NavItem><Link to="/profile" className="nav-link">Profile</Link></NavItem>
         <NavItem><Link to="/about" className="nav-link">About</Link></NavItem>
       </Nav>
