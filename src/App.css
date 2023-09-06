@@ -4,9 +4,9 @@ html, body, #root {
   text-align: center;
   color: #e3d0e0;
   background-color: rgb(33, 37, 41);
-  font-family: 'Great Vibes', cursive;
-  font-family: 'Henny Penny', cursive;
-  font-family: 'Quintessential', cursive;
+  /* font-family: 'Great Vibes', cursive; */
+  /* font-family: 'Henny Penny', cursive; */
+  /* font-family: 'Quintessential', cursive; */
   height: 100%;
   width: 100%;
   max-width: ;
@@ -16,11 +16,9 @@ html, body, #root {
 /* header styles */
 h1 {
   margin-top: 20px;
-  font-size: 36px;
   margin-bottom: 5px;
+  font-family: 'Great Vibes', cursive;
 }
-
-
 
 .text-icon {
   color: rgb(33, 37, 41);
@@ -43,8 +41,7 @@ div.navbar-nav {
 div.nav-item {
   margin: 5px;
   max-height: 50px;
-  font-family: 'Great Vibes', cursive;
-
+  font-family: 'Quintessential', cursive;
 }
 
 a.nav-link {
@@ -71,9 +68,18 @@ main {
   flex-direction: column;
 }
 
-.location-input {
+h2 {
+  font-family: 'Great Vibes', cursive;
+}
+
+label {
+  font-family: 'Quintessential', cursive;
+}
+
+input.location-input {
   margin: 5px;
   border-radius: 5px;
+  font-family: 'Quintessential', cursive;
 }
 
 /* .search-bar {
@@ -131,7 +137,7 @@ button {
   box-sizing: border-box;
   border-color: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
   color: #FFFFFF;
-  font-family: Phantomsans, sans-serif;
+  font-family: 'Quintessential', cursive;  
   font-size: 15px;
   line-height: 1em;
   padding: 5px;
@@ -144,3 +150,32 @@ button {
 .search-btn:hover {
   background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
 }
+
+/* profile styles */
+div#team {
+  max-width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+div.card {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  margin: 0 10px;
+  padding: 10px;
+  align-items: center;
+  border-radius: 8px;
+}
+
+div.card ul {
+  list-style-type: none;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+/* a:hover {
+  background-color: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+} */
