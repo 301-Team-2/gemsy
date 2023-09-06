@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { useLocationContext } from "./LocationContext"; // Use relative import
 import { Modal, Button } from 'react-bootstrap'; // Import Modal and Button components
-import { useLocationContext } from "./LocationContext";
 
 class SearchDates extends Component {
   constructor(props) {
@@ -16,17 +14,6 @@ class SearchDates extends Component {
     };
   }
 
-function SearchDates() {
-  // State for search form inputs
-  const [searchFormData, setSearchFormData] = useState({ location: '' });
-
-  // State for search results
-  const [restaurantResults, setRestaurantResults] = useState([]);
-  const [eventResults, setEventResults] = useState([]);
-
-  // Access the addLocation function from the context
-  const { addLocation } = useLocationContext();
-  
   // Function to open the modal
   openModal = () => {
     this.setState({ showModal: true });
@@ -59,9 +46,6 @@ function SearchDates() {
       const restaurantData = restaurantResponse.data;
       const eventData = eventResponse.data;
 
-      setRestaurantResults(restaurantData);
-      setEventResults(eventData);
-
       this.setState({
         restaurantResults: restaurantData,
         eventResults: eventData,
@@ -70,15 +54,14 @@ function SearchDates() {
 
       // Close the modal after search
       this.closeModal();
-
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
   // Function to handle saving a location
-  handleSaveLocation = (location) => {
-    addLocation(location);
+  handleSaveLocation = () => {
+    // Implement your save location logic here
   };
 
   render() {
