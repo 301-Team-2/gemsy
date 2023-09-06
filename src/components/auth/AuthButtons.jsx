@@ -9,13 +9,3 @@ function AuthButtons() {
 }
 
 export default AuthButtons;
-
-// app.post('/events', (req, res) => {
-//   try {
-//     const searchFormData = req.body;
-
-//     res.json({ message: 'Data received successfully' });
-//   } catch (error) {
-//     console.error('Error:', error);
-//     res.status(500).json({ error: 'Internal server error' });
-//   }
