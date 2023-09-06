@@ -1,32 +1,20 @@
-#root {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 1rem;
+html, body, #root {
+  margin: 0;
+  padding: 0;
   text-align: center;
   color: #e3d0e0;
   background-color: rgb(33, 37, 41);
-}
-
-html {
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  color: #e3d0e0;
-  background-color: rgb(33, 37, 41);
-}
-
-body {
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  color: #e3d0e0;
-  background-color: rgb(33, 37, 41);
-  place-items: center;
+  font-family: 'Great Vibes', cursive;
+  font-family: 'Henny Penny', cursive;
+  font-family: 'Quintessential', cursive;
+  height: 100%;
+  width: 100%;
+  max-width: ;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 /* header styles */
 h1 {
-  text-align: center;
   margin-top: 20px;
   font-size: 36px;
   margin-bottom: 5px;
@@ -36,6 +24,8 @@ h1 {
 
 .text-icon {
   color: rgb(33, 37, 41);
+  font-family: 'Henny Penny', cursive;
+
 }
 
 nav {
@@ -47,11 +37,19 @@ nav {
 
 div.navbar-nav {
   flex-direction: row;
-  
+  max-height: 50px;
 }
 
-.nav-item {
+div.nav-item {
   margin: 5px;
+  max-height: 50px;
+  font-family: 'Great Vibes', cursive;
+
+}
+
+a.nav-link {
+  max-height: 50px;
+  font-size: 16px;
 }
 
 span.navbar-brand {
@@ -64,15 +62,37 @@ p.text-icon {
   
 }
 
-
 /* main styles */
 main {
+  margin-top: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  flex-direction: column;
 }
 
+.location-input {
+  margin: 5px;
+  border-radius: 5px;
+}
+
+/* .search-bar {
+  max-width: 900px;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: antiquewhite;
+} */
+
+/* .location-input {
+  margin-bottom: 5px;
+} */
 
 /* img styles */
 img.about-pic {
@@ -101,5 +121,26 @@ img.gemsy-logo {
 button {
   background-color: rgb(33, 37, 41);
   color: #e3d0e0;
+}
 
+.login-btn,
+.search-btn {
+  align-items: center;
+  border: 0;
+  border-radius: 8px;  
+  box-sizing: border-box;
+  border-color: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+  color: #FFFFFF;
+  font-family: Phantomsans, sans-serif;
+  font-size: 15px;
+  line-height: 1em;
+  padding: 5px;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.login-btn:hover,
+.search-btn:hover {
+  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
 }
