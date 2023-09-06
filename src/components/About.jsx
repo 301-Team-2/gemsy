@@ -16,8 +16,8 @@ function About() {
             <li>insert text here</li>
           </ul>
           <div>
-            <a href="https://github.com/alejandraa0208" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://www.linkedin.com/in/aaaltamirano/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="insert github link here" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="insert linkedin link here" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
         </div>
         <div className="card">
@@ -29,8 +29,8 @@ function About() {
             <li>insert text here</li>
           </ul>
           <div>
-            <a href="https://github.com/jshea44" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://www.linkedin.com/in/joshshea44/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="insert github link here" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="insert linkedin link here" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
         </div>
         <div className="card">
@@ -42,8 +42,8 @@ function About() {
             <li>insert text here</li>
           </ul>
           <div>
-            <a href="https://github.com/SamaadTurner" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://www.linkedin.com/in/samaad-turner/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="insert github link here" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="insert linkedin link here" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
         </div>
         <div className="card">
