@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap'; // Import Modal and Button components
-import { useLocationContext } from "./LocationContext";
 
 class SearchDates extends Component {
   constructor(props) {
@@ -61,8 +60,8 @@ class SearchDates extends Component {
   };
 
   // Function to handle saving a location
-  handleSaveLocation = (location) => {
-    addLocation(location);
+  handleSaveLocation = () => {
+    // Implement your save location logic here
   };
 
   render() {

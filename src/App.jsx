@@ -9,7 +9,6 @@ import {
 import SearchDates from './components/SearchDates';
 import Profile from './components/Profile';
 import About from './components/About';
-import { LocationProvider } from "./components/LocationContext"; // Use relative import
 
 class App extends React.Component {
   render() {
@@ -17,7 +16,6 @@ class App extends React.Component {
       <>
         <Router>
           <Header />
-          <LocationProvider> {/* Wrap your Router with LocationProvider */}
             <Routes>
               <Route 
                 exact path="/"
@@ -32,7 +30,6 @@ class App extends React.Component {
                 element={<About />}
               />
             </Routes>
-          </LocationProvider>
         </Router>
       </>
     )

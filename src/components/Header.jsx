@@ -19,7 +19,7 @@ function Header() {
         />
         <p className='text-icon'>Gemsy</p>
       </Navbar.Brand>
-      <Nav className="navigation">
+      <Nav className="mr-auto">
         <NavItem><Link to="/" className="nav-link">Home</Link></NavItem>
         <NavItem><Link to="/profile" className="nav-link">Profile</Link></NavItem>
         <NavItem><Link to="/about" className="nav-link">About</Link></NavItem>
