@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useLocationContext } from "./LocationContext";
+import { useLocationContext } from "./LocationContext"; // Use relative import
 
 
 function SearchDates() {
@@ -10,9 +10,6 @@ function SearchDates() {
   // State for search results
   const [restaurantResults, setRestaurantResults] = useState([]);
   const [eventResults, setEventResults] = useState([]);
-
-  // State to control the visibility of search results
-  const [showResults, setShowResults] = useState(false);
 
   // Access the addLocation function from the context
   const { addLocation } = useLocationContext();
@@ -41,9 +38,6 @@ function SearchDates() {
 
       setRestaurantResults(restaurantData);
       setEventResults(eventData);
-
-      // Show the results
-      setShowResults(true);
     } catch (error) {
       console.error('Error:', error);
     }

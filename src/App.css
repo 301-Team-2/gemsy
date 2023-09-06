@@ -53,10 +53,11 @@ span.navbar-brand {
   display: flex;
 }
 
-p.text-icon {
-  margin: 0;
-  margin-top: 3px;
-  
+nav {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: rgb(231, 202, 167);
 }
 
 /* main styles */
