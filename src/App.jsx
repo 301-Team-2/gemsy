@@ -9,6 +9,7 @@ import {
 import SearchDates from './components/SearchDates';
 import Profile from './components/Profile';
 import About from './components/About';
+import ChatGPT from './components/ChatGPT';
 import { LocationProvider } from "./components/LocationContext"; // Use relative import
 
 class App extends React.Component {
@@ -23,6 +24,10 @@ class App extends React.Component {
                 exact path="/"
                 element={<SearchDates />}
               />
+              <Route
+                exact path="/chat"
+                element={<ChatGPT/>}
+                />
               <Route 
                 path="/profile"
                 element={<Profile />} 
