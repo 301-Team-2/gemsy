@@ -8,7 +8,7 @@ import GemsyLogo from '../assets/GemsyLogo.png'
 
 function Header() {
   return (
-    <Navbar >
+    <Navbar collapseOnSelect expand="lg">
       <Navbar.Brand>
         <img
             src={GemsyLogo}
@@ -22,7 +22,7 @@ function Header() {
       <Nav className="mr-auto">
         <NavItem><Link to="/" className="nav-link">Home</Link></NavItem>
         <NavItem><Link to="/profile" className="nav-link">Profile</Link></NavItem>
-        <NavItem><Link to="/about" className="nav-link">About</Link></NavItem>
+        <NavItem><Link to="/about" className="nav-link">About Us</Link></NavItem>
       </Nav>
       <Nav>
         <AuthButtons />
