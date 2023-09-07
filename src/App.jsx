@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
@@ -17,6 +18,7 @@ class App extends React.Component {
       <>
         <Router>
           <Header />
+          <hr />
             <Routes>
               <Route 
                 exact path="/"
@@ -35,6 +37,8 @@ class App extends React.Component {
                 element={<About />}
               />
             </Routes>
+          <hr />
+          <Footer />
         </Router>
       </>
     )
