@@ -7,7 +7,7 @@ function Login() {
   return (
     <div>
       {/* <h2>Login to Gemsy</h2> */}
-      <button onClick={() => loginWithRedirect()}>Login to Gemsy</button>
+      <button className='login-btn' onClick={() => loginWithRedirect()}>Login to Gemsy</button>
     </div>
   );
 }
