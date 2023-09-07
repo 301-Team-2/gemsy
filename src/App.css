@@ -3,14 +3,13 @@ html, body, #root {
   padding: 0;
   text-align: center;
   color: #e3d0e0;
-  background-color: rgb(33, 37, 41);
+  background-color: #404565;
   /* font-family: 'Great Vibes', cursive; */
   /* font-family: 'Henny Penny', cursive; */
   /* font-family: 'Quintessential', cursive; */
   height: 100%;
   width: 100%;
-  max-width: ;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-x: hidden;
 }
 
 /* header styles */
@@ -21,16 +20,20 @@ h1 {
 }
 
 .text-icon {
-  color: rgb(33, 37, 41);
+  color: #e3d0e0;  
+  font-size: 30px;
   font-family: 'Henny Penny', cursive;
-
 }
 
+/* navigation styles */
 nav {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  background-color: rgb(231, 202, 167);
+}
+
+nav.navbar.navbar-expand-lg.navbar-light {
+  justify-content: center;
 }
 
 div.navbar-nav {
@@ -47,26 +50,26 @@ div.nav-item {
 a.nav-link {
   max-height: 50px;
   font-size: 16px;
+  color: #e3d0e0;  
+
 }
 
 span.navbar-brand {
   display: flex;
+  padding: 0;
+  height: 48px;
+  margin-right: 10px;
 }
 
-nav {
-  text-align: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  background-color: rgb(231, 202, 167);
+.auth-buttons-item {
+  margin-top: 5px;
 }
 
 /* main styles */
-main {
-  margin-top: 30px;
+div.cards {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
 }
 
 h2 {
@@ -109,11 +112,11 @@ img.about-pic {
 }
 
 img.gemsy-logo {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
 }
 
-.restaurant-img {
+img.card-img-top {
   width: 300px;
   height: 300px;
   align-self: center;
@@ -165,9 +168,12 @@ div.card {
   flex-direction: column;
   width: 350px;
   margin: 0 10px;
+  margin-top: 5px;
   padding: 10px;
   align-items: center;
   border-radius: 8px;
+  background-color: #e3d0e0;  
+
 }
 
 div.card ul {
@@ -176,7 +182,3 @@ div.card ul {
   padding: 0;
   margin: 0;
 }
-
-/* a:hover {
-  background-color: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
-} */
