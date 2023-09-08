@@ -7,7 +7,8 @@ const teamMembers = [
     githubLink: 'https://github.com/alejandraa0208',
     linkedinLink: 'https://www.linkedin.com/in/aaaltamirano/',
     bio: [
-
+      'Army Veteran & previous Fraud Analyst turned Software Developer',
+      'Looking to incorporate my new found skills to help clients with designing products such as websites or anything related to their profession'
     ],
   },
   {
@@ -25,7 +26,7 @@ const teamMembers = [
     githubLink: 'https://github.com/SamaadTurner',
     linkedinLink: 'https://www.linkedin.com/in/samaad-turner/',
     bio: [
-      
+
     ],
   },
   {
