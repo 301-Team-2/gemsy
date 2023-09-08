@@ -182,3 +182,13 @@ div.card ul {
   padding: 0;
   margin: 0;
 }
+
+.chat-response {
+  padding: 50px;
+  border: 0;
+  border-radius: 8px;  
+  box-sizing: border-box;
+  border-color: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+  overflow-x: hidden;
+  overflow-y: auto; 
+}
