@@ -1,70 +1,149 @@
-#root {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 1rem;
+html, body, #root {
+  margin: 0;
+  padding: 0;
   text-align: center;
   color: #e3d0e0;
-  background-color: rgb(33, 37, 41);
-}
-
-html {
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  color: #e3d0e0;
-  background-color: rgb(33, 37, 41);
-}
-
-body {
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  color: #e3d0e0;
-  background-color: rgb(33, 37, 41);
-  place-items: center;
+  background-color: #404565;
+  /* font-family: 'Great Vibes', cursive; */
+  /* font-family: 'Henny Penny', cursive; */
+  /* font-family: 'Quintessential', cursive; */
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 /* header styles */
 h1 {
-  text-align: center;
   margin-top: 20px;
-  font-size: 36px;
   margin-bottom: 5px;
+  font-family: 'Great Vibes', cursive;
 }
-
-nav-item {
-  display: flex;
-  flex-direction: row;
-}
-
 
 .text-icon {
-  color: rgb(33, 37, 41);
+  color: #e3d0e0;  
+  font-size: 30px;
+  font-family: 'Henny Penny', cursive;
 }
 
-.mr-auto {
-  display: flex;
-}
-
-span.navbar-brand {
-  display: flex;
-}
-
+/* navigation styles */
 nav {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  background-color: rgb(231, 202, 167);
+}
+
+nav.navbar.navbar-expand-lg.navbar-light {
+  justify-content: center;
+}
+
+div.navbar-nav {
+  flex-direction: row;
+  max-height: 50px;
+}
+
+div.nav-item {
+  margin: 5px;
+  max-height: 50px;
+  font-family: 'Quintessential', cursive;
+}
+
+a.nav-link {
+  max-height: 50px;
+  font-size: 16px;
+  color: #e3d0e0;  
+
+}
+
+span.navbar-brand {
+  display: flex;
+  padding: 0;
+  height: 48px;
+  margin-right: 10px;
+}
+
+.auth-buttons-item {
+  margin-top: 5px;
 }
 
 /* main styles */
-main {
+div.search-bar {
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
-  margin-top: 30px;
+  max-width: 100%;
 }
 
+div.restaurants-search,
+div.events-search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 450px;
+}
+
+label {
+  font-family: 'Quintessential', cursive;
+  max-width: 450px;
+}
+
+input.location-input {
+  margin: 5px;
+  border-radius: 5px;
+  font-family: 'Quintessential', cursive;
+  max-width: 450px;
+}
+
+div.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+div.card {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  margin: 0 10px;
+  margin-top: 5px;
+  padding: 10px;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #e3d0e0;  
+}
+
+h2 {
+  font-family: 'Great Vibes', cursive;
+}
+
+div.card-title.h5 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 30px;
+  color: #404565;
+}
+
+p.card-text {
+  font-family: 'Quintessential', cursive;
+  font-size: 15px;
+  margin-bottom: 5px;
+  color: #404565;
+}
+
+a.links {
+  margin-left: 3px;
+  background-image: none;
+  color: #404565;
+  text-decoration: none;
+  font-family: 'Quintessential', cursive;
+}
+
+a.links:hover {
+  color: #404565;
+  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  transition: background 0.3s;
+}
 
 /* img styles */
 img.about-pic {
@@ -74,11 +153,11 @@ img.about-pic {
 }
 
 img.gemsy-logo {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
 }
 
-.restaurant-img {
+img.card-img-top {
   width: 300px;
   height: 300px;
   align-self: center;
@@ -90,8 +169,102 @@ img.gemsy-logo {
   align-self: center;
 }
 
-button {
+/* buttons style */
+button,
+button.seeMore-btn.btn.btn-primary,
+button.save-btn.btn.btn-primary {
   background-color: rgb(33, 37, 41);
   color: #e3d0e0;
+  border-color: rgb(33, 37, 41);
+}
 
+/* button.search-btn {
+  max-width: 200px;
+} */
+button.save-btn.btn.btn-primary {
+  margin-left: 5px;
+}
+
+.login-btn,
+.search-btn,
+.chat-btn,
+button.seeMore-btn.btn.btn-primary,
+button.save-btn.btn.btn-primary,
+button.sign-up {
+  align-items: center;
+  border: 0;
+  border-radius: 8px;  
+  box-sizing: border-box;
+  border-color: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+  color: #FFFFFF;
+  font-family: 'Quintessential', cursive;  
+  font-size: 15px;
+  line-height: 1em;
+  padding: 5px;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.login-btn:hover,
+.search-btn:hover,
+.chat-btn:hover,
+button.seeMore-btn.btn.btn-primary:hover,
+button.save-btn.btn.btn-primary:hover,
+button.sign-up:hover {
+  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+}
+
+/* profile styles */
+div#team {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+div.about-card {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: 0 5px;
+  margin-top: 5px;
+  padding: 10px;
+  align-items: center;
+  border-radius: 8px;
+  color: #404565;
+  background-color: #e3d0e0;
+}
+
+div.card ul {
+  list-style-type: none;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+div.chat-response {
+  padding: 20px;
+  margin: 30px;
+  border: 0;
+  border-radius: 8px;
+  font-family: 'Quintessential', cursive;
+  font-size: 15px;
+  color: #404565;
+  background-color: #e3d0e0;
+  text-align: left;
+}
+
+h1.chat-title {
+  font-size: 20px;
+}
+
+.chatbox {
+  font-family: 'Quintessential', cursive;
+  text-align: center;
+}
+
+.footer-text {
+  font-family: 'Henny Penny', cursive;
+  text-align: center;
 }

@@ -1,43 +1,57 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useLocationContext } from "./LocationContext"; // Use relative import
+import '../App.css'
+import { Modal, Button, Card } from 'react-bootstrap';
+import { useAuth0 } from '@auth0/auth0-react';
+import { saveLocationToUser } from '../components/userService';
 
 
 function SearchDates() {
-  // State for search form inputs
-  const [searchFormData, setSearchFormData] = useState({ location: '' });
-
-  // State for search results
+  const { user } = useAuth0();
+  const [restaurantSearchData, setRestaurantSearchData] = useState({ location: '' });
+  const [eventSearchData, setEventSearchData] = useState({ location: '' });
   const [restaurantResults, setRestaurantResults] = useState([]);
   const [eventResults, setEventResults] = useState([]);
+  const [showResults, setShowResults] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
-  // Access the addLocation function from the context
-  const { addLocation } = useLocationContext();
+  const openEventDetailsModal = (event) => {
+    setSelectedEvent(event);
+  };
 
-  // Function to handle search form submission
-  const handleSearch = async () => {
+  const closeEventDetailsModal = () => {
+    setSelectedEvent(null);
+  };
+
+  const handleRestaurantSearch = async () => {
     try {
       const restaurantApiUrl = `${import.meta.env.VITE_BACKEND_URL}/restaurants`;
-      const eventApiUrl = `${import.meta.env.VITE_BACKEND_URL}/events`; // Use the endpoint for events
-
-      const [restaurantResponse, eventResponse] = await Promise.all([
-        axios.get(restaurantApiUrl, {
-          params: {
-            searchQuery: searchFormData.location,
-          },
-        }),
-        axios.get(eventApiUrl, {
-          params: {
-            searchQuery: searchFormData.location,
-          },
-        }),
-      ]);
-
+      const restaurantResponse = await axios.get(restaurantApiUrl, {
+        params: {
+          searchQuery: restaurantSearchData.location,
+        },
+      });
       const restaurantData = restaurantResponse.data;
-      const eventData = eventResponse.data;
-
       setRestaurantResults(restaurantData);
+      setEventResults([]);
+      setShowResults(true);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  
+  const handleEventSearch = async () => {
+    try {
+      const eventApiUrl = `${import.meta.env.VITE_BACKEND_URL}/events`;
+      const eventResponse = await axios.get(eventApiUrl, {
+        params: {
+          searchQuery: eventSearchData.location,
+        },
+      });
+      const eventData = eventResponse.data;
       setEventResults(eventData);
+      setRestaurantResults([]);
+      setShowResults(true);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -45,54 +59,166 @@ function SearchDates() {
 
   // Function to handle saving a location
   const handleSaveLocation = (location) => {
-    addLocation(location); // Use the addLocation function from the context
+    const userEmail = user.email;
+
+    saveLocationToUser(userEmail, location)
+      .then(() => {
+        console.log('Location saved:', location);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
 
   return (
-    <div>
-      <h2>Search for Date Ideas</h2>
-      <div>
-        <label>Location:</label>
-        <input
-          type="text"
-          placeholder="Enter location"
-          value={searchFormData.location}
-          onChange={(e) => setSearchFormData({ location: e.target.value })}
-        />
+    <>
+      <div className='search-bar'>
+        <div
+          className='restaurants-search'>
+            <label>Search for Restaurants:</label> 
+              <input
+                className="location-input"
+                type="text"
+                placeholder="Enter location"
+                value={restaurantSearchData.location}
+                onChange={(e) =>                  setRestaurantSearchData({ location: e.target.value })
+                }
+              />
+              <button 
+                className="search-btn" 
+                onClick={handleRestaurantSearch}
+                >
+                  Search Restaurants
+              </button>
+        </div>
+        <div 
+          className='events-search'>
+            <label>Search for Events:</label>
+              <input
+                className="location-input"
+                type="text"
+                placeholder="Enter location"
+                value={eventSearchData.location}
+                onChange={(e) =>
+                  setEventSearchData({ location: e.target.value })
+                }
+              />
+              <button 
+                className="search-btn" 
+                onClick={handleEventSearch}
+              >
+                Search Events
+              </button>
+        </div>
       </div>
 
-      <button onClick={handleSearch}>Search</button>
+      {showResults && (
+        <>
+          {restaurantResults.length > 0 && (
+            <div className='show-restaurants'>
+              <h2>Restaurants</h2>
+                <div className='cards'>
+                  {restaurantResults.map((restaurant, index) => (
+                    <Card key={index}>
+                      <Card.Img variant="top" src={restaurant.image_url} alt="restaurant-img" />
+                      <Card.Body>
+                        <Card.Title>
+                          {restaurant.name}
+                        </Card.Title>
+                        <Card.Text>
+                          Rating: {restaurant.rating} | Price: {restaurant.price}
+                        </Card.Text>
+                        <Card.Text>
+                          Location: {restaurant.location}
+                        </Card.Text>
+                        <Card.Text>
+                          <a className='links' href={restaurant.url} target="_blank" rel="noopener noreferrer"
+                          data-label='url'
+                          >
+                            Click Here for more info
+                          </a>
+                        </Card.Text>
+                        {user && (
+                          <Button
+                            className='save-btn'
+                            variant="primary"
+                            onClick={() => handleSaveLocation(restaurant.location)}
+                          >
+                            Save Location
+                          </Button>
+                        )}
+                      </Card.Body>
+                    </Card>
+                  ))}
+                </div> 
+            </div>
+          )}
 
-      <div>
-        {/* Display restaurant search results */}
-        <h2>Restaurants</h2>
-        {restaurantResults.map((restaurant, index) => (
-          <div key={index}>
-            <h3><a href={restaurant.url} target="_blank" rel="noopener noreferrer">{restaurant.name}</a></h3>
-            <img src={restaurant.image_url} className="restaurant-img" alt="restaurant-img" />
-            <p>Rating: {restaurant.rating}</p>
-            <p>Price: {restaurant.price}</p>
-            <p>Location:{restaurant.location}</p>
-            <button onClick={() => handleSaveLocation(restaurant.location)}>Save Location</button>
-          </div>
-        ))}
-      </div>
+          {eventResults.length > 0 && (
+            <div className='show-events'>
+              <h2>Events</h2>
+                <div className='cards'>
+                  {eventResults.map((event, index) => (
+                    <Card key={index}>
+                      <Card.Img variant="top" src={event.image_url} alt="event-img" />
+                      <Card.Body>
+                        <Card.Title>
+                            {event.name}
+                        </Card.Title>
+                        <Card.Text>
+                          Start Time: {event.time_start}
+                        </Card.Text>
+                        <Card.Text>
+                          End Time: {event.time_end}
+                        </Card.Text>
+                        <Button
+                          className='seeMore-btn'
+                          variant="primary"
+                          onClick={() => openEventDetailsModal(event)}
+                          >
+                            See More
+                        </Button>
+                        {user && (
+                          <Button
+                            className='save-btn'
+                            variant="primary"
+                            onClick={() => handleSaveLocation(event.location)}
+                          >
+                            Save Location
+                          </Button>
+                        )}
+                      </Card.Body>
+                    </Card>
+                  ))}
+                </div>
+            </div>
+          )}
+        </>
+      )}
 
-      <div>
-        {/* Display event search results */}
-        <h2>Events</h2>
-        {eventResults.map((event, index) => (
-          <div key={index}>
-            <h3><a href={event.event_site_url} target="_blank" rel="noopener noreferrer">{event.name}</a></h3>
-            <img src={event.image_url} className="event-img" alt="event-img" />
-            <p>Description: {event.description}</p>
-            <p>Start Time: {event.time_start}</p>
-            <p>End Time: {event.time_end}</p>
-            <button onClick={() => handleSaveLocation(event.location)}>Save Location</button>
-          </div>
-        ))}
-      </div>
-    </div>
+      <Modal show={selectedEvent !== null} onHide={closeEventDetailsModal} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Event Details</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="scrollable-modal">
+          {selectedEvent && (
+            <>
+              <h3>{selectedEvent.name}</h3>
+              <p>
+                {selectedEvent.description}
+              </p>
+              <p>
+                <a className='links' href={selectedEvent.event_site_url} target="_blank" rel="noopener noreferrer" data-label='url'>
+                  Click Here for the Event Link
+                </a>
+              </p>
+            </>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 }
 

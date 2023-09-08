@@ -1,41 +1,54 @@
 import React from 'react';
-import Header from './components/Header';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import "bootstrap/dist/css/bootstrap.min.css";
 import {
   BrowserRouter as Router,
   Route,
   Routes
 } from "react-router-dom";
-import SearchDates from './components/SearchDates';
-import Profile from './components/Profile';
-import About from './components/About';
-import { LocationProvider } from "./components/LocationContext"; // Use relative import
+import { Auth0Provider } from "@auth0/auth0-react";
+import SearchDates from "./components/SearchDates";
+import Profile from "./components/Profile";
+import About from "./components/About";
+import ChatGPT from "./components/ChatGPT";
 
 class App extends React.Component {
   render() {
     return (
-      <>
+      <Auth0Provider
+        domain={import.meta.env.VITE_AUTH0_DOMAIN}
+        clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
+        authorizationParams={{
+          redirect_uri: window.location.origin,
+        }}
+      >
         <Router>
           <Header />
-          <LocationProvider> {/* Wrap your Router with LocationProvider */}
-            <Routes>
-              <Route 
-                exact path="/"
-                element={<SearchDates />}
-              />
-              <Route 
-                path="/profile"
-                element={<Profile />} 
-              />
-              <Route 
-                path="/about"
-                element={<About />}
-              />
-            </Routes>
-          </LocationProvider>
+          <hr />
+          <Routes>
+            <Route 
+              exact path="/"
+              element={<SearchDates />}
+            />
+            <Route
+              exact path="/chat"
+              element={<ChatGPT/>}
+            />
+            <Route 
+              path="/profile"
+              element={<Profile />} 
+            />
+            <Route 
+              path="/about"
+              element={<About />}
+            />
+          </Routes>
+          <hr />
+          <Footer />
         </Router>
-      </>
-    )
+      </Auth0Provider>
+    );
   }
 }
 

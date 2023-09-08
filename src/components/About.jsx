@@ -1,4 +1,107 @@
-import React from 'react';
+import PropTypes from 'prop-types';
+
+const teamMembers = [
+  {
+    name: 'Alejandra Altamirano',
+    imageSrc: './assets/alejandra.png',
+    githubLink: 'https://github.com/alejandraa0208',
+    linkedinLink: 'https://www.linkedin.com/in/aaaltamirano/',
+    bio: [
+      'Army Veteran & previous Fraud Analyst turned Software Developer',
+      'Looking to incorporate my new found skills to help clients with designing products such as websites or anything related to their profession'
+    ],
+  },
+  {
+    name: 'Joshua Shea',
+    imageSrc: './assets/josh.png',
+    githubLink: 'https://github.com/jshea44',
+    linkedinLink: 'https://www.linkedin.com/in/joshshea44/',
+    bio: [
+      '-Worked as a Security Forces Member in the United States Air Force.',
+
+     '- Now wanting to learn the ins and outs of software development.',
+    ],
+  },
+  {
+    name: 'Samaad Turner',
+    imageSrc: './assets/samaad.png',
+    githubLink: 'https://github.com/SamaadTurner',
+    linkedinLink: 'https://www.linkedin.com/in/samaad-turner/',
+    bio: [
+
+      'Recent graduate looking to get a job doing software engineering.', 
+      'Background in frontend/backend and mobile development with college and bootcamp experience.',
+      
+    ],
+  },
+  {
+    name: 'Sydney Mae Pagalan',
+    imageSrc: './assets/sydney.jpg',
+    githubLink: 'https://github.com/sfpagalan',
+    linkedinLink: 'https://www.linkedin.com/in/sfpagalan/',
+    bio: [
+      'Navy Vet & Medical Assistant - Software Developer', 
+      'Worked at Kaiser Permanente as an MA and served 6 years in the US Navy.',
+      'I am deeply passionate about the intersection of the medical field and technology, as well as my love for gaming.',
+    ],
+  },
+];
+
+function TeamMemberCard({ member }) {
+  return (
+    <div className="about-card">
+      <img src={member.imageSrc} className="about-pic" alt={member.name} />
+      <p
+        style={{
+          fontWeight: 'bold', 
+          fontSize: '30px', 
+          fontFamily: 'Great Vibes, cursive',
+          margin: '0' 
+        }}>{member.name}</p>
+      {member.bio && (
+        <ul 
+          style={{
+            width: '350px',
+            fontSize: '15px', 
+            fontFamily: 'Quintessential, cursive',
+            listStyle: 'none',
+            padding: '0',
+          }}
+        >
+          {member.bio.map((text, index) => (
+            <li key={index}>{text}</li>
+          ))}
+        </ul>
+      )}
+      <div>
+        <a 
+          href={member.githubLink} 
+          className='links'
+            target="_blank" 
+            rel="noopener noreferrer">
+          GitHub |
+        </a>
+        <a 
+          href={member.linkedinLink} 
+          className='links'
+            target="_blank" 
+            rel="noopener noreferrer">
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  );
+}
+
+TeamMemberCard.propTypes = {
+  member: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    imageSrc: PropTypes.string.isRequired,
+    githubLink: PropTypes.string.isRequired,
+    linkedinLink: PropTypes.string.isRequired,
+    bio: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
+};
 
 function About() {
   return (
@@ -7,61 +110,13 @@ function About() {
         <h1>The Team</h1>
       </header>
       <div id="team">
-        <div className="card">
-          <img src="src/assets/alejandra.png" className='about-pic' alt='alejandra'/>
-          <p>Alejandra Altamirano</p>
-          <ul>
-            <li>insert text here</li>
-            <li>insert text here</li>
-            <li>insert text here</li>
-          </ul>
-          <div>
-            <a href="insert github link here" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="insert linkedin link here" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          </div>
-        </div>
-        <div className="card">
-          <img src="src/assets/josh.png" className='about-pic' alt='joshua'/>
-          <p>Joshua Shea</p>
-          <ul>
-            <li>insert text here</li>
-            <li>insert text here</li>
-            <li>insert text here</li>
-          </ul>
-          <div>
-            <a href="insert github link here" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="insert linkedin link here" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          </div>
-        </div>
-        <div className="card">
-          <img src="src/assets/samaad.png" className='about-pic' alt='samaad'/>
-          <p>Samaad Turner</p>
-          <ul>
-            <li>insert text here</li>
-            <li>insert text here</li>
-            <li>insert text here</li>
-          </ul>
-          <div>
-            <a href="insert github link here" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="insert linkedin link here" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          </div>
-        </div>
-        <div className="card">
-          <img src="src/assets/sydney.jpg" className='about-pic' alt="sydney" />
-          <p>Sydney Mae Pagalan</p>
-          <ul>
-            <li>Navy Vet & Medical Assistant - Software Developer</li>
-            <li>Previous Experience: Work at Kaiser Permanente as an MA and served 6 years in the US Navy.</li>
-            <li>I am deeply passionate about the intersection of the medical field and technology, as well as my love for gaming.</li>
-          </ul>
-          <div>
-            <a href="https://github.com/sfpagalan" target="_blank" rel="noopener noreferrer">GitHub</a><br />
-            <a href="https://www.linkedin.com/in/sfpagalan/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          </div>
-        </div>
+        {teamMembers.map((member, index) => (
+          <TeamMemberCard key={index} member={member} />
+        ))}
       </div>
     </div>
   );
 }
 
 export default About;
+
