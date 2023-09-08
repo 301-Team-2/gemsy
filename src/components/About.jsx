@@ -17,7 +17,9 @@ const teamMembers = [
     githubLink: 'https://github.com/jshea44',
     linkedinLink: 'https://www.linkedin.com/in/joshshea44/',
     bio: [
-      
+      '-Worked as a Security Forces Member in the United States Air Force.',
+
+     '- Now wanting to learn the ins and outs of software development.',
     ],
   },
   {
@@ -27,6 +29,9 @@ const teamMembers = [
     linkedinLink: 'https://www.linkedin.com/in/samaad-turner/',
     bio: [
 
+      'Recent graduate looking to get a job doing software engineering.', 
+      'Background in frontend/backend and mobile development with college and bootcamp experience.',
+      
     ],
   },
   {
