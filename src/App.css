@@ -72,6 +72,18 @@ div.cards {
   justify-content: center;
 }
 
+div.card {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  margin: 0 10px;
+  margin-top: 5px;
+  padding: 10px;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #e3d0e0;  
+}
+
 h2 {
   font-family: 'Great Vibes', cursive;
 }
@@ -157,23 +169,23 @@ button {
 
 /* profile styles */
 div#team {
-  max-width: 400px;
+  margin: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-div.card {
+div.about-card {
   display: flex;
   flex-direction: column;
-  width: 350px;
-  margin: 0 10px;
+  width: 400px;
+  margin: 0 5px;
   margin-top: 5px;
   padding: 10px;
   align-items: center;
   border-radius: 8px;
-  background-color: #e3d0e0;  
-
+  color: #404565;
+  background-color: #e3d0e0;
 }
 
 div.card ul {
