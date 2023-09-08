@@ -13,7 +13,7 @@ const teamMembers = [
   },
   {
     name: 'Joshua Shea',
-    imageSrc: `public/alejandra.png`,
+    imageSrc: './assets/josh.png',
     githubLink: 'https://github.com/jshea44',
     linkedinLink: 'https://www.linkedin.com/in/joshshea44/',
     bio: [
