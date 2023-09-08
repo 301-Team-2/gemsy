@@ -28,10 +28,11 @@ const handleSearch = async (e) => {
 };
 
 return (
-    <div>
-        <h1> Want to know learn more about a location? Ask me anything...</h1>
+    <div className='chat-container'>
+        <h1 className='chat-title'> Want to know learn more about a location? Ask me anything...</h1>
         <div>
-            <textarea 
+            <textarea
+            className='chatbox'
             rows="4" 
             cols="50"
             placeholder='type your question'
