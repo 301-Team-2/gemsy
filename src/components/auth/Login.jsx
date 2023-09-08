@@ -1,3 +1,4 @@
+// Login.js
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -6,10 +7,10 @@ function Login() {
 
   return (
     <div>
-      {/* <h2>Login to Gemsy</h2> */}
       <button className='login-btn' onClick={() => loginWithRedirect()}>Login to Gemsy</button>
     </div>
   );
 }
 
 export default Login;
+

@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -7,6 +8,7 @@ import GemsyLogo from '../assets/GemsyLogo.png'
 
 
 function Header() {
+
   return (
     <Navbar collapseOnSelect expand="lg">
       <Navbar.Brand>
@@ -22,16 +24,28 @@ function Header() {
       <div className='navigation'>
         <Nav className="mr-auto">
           <NavItem>
-            <Link to="/" className="nav-link">Home</Link>
+            <Link to="/"
+              className="nav-link">
+                Home
+            </Link>
           </NavItem>
           <NavItem>
-            <Link to="/chat" className="nav-link">Chat AI</Link>
+            <Link to="/chat"
+              className="nav-link">
+                Chat AI
+            </Link>
           </NavItem>
           <NavItem>
-            <Link to="/profile" className="nav-link">Profile</Link>
+            <Link to="/profile" 
+              className="nav-link">
+                Profile
+            </Link>
           </NavItem>
           <NavItem>
-            <Link to="/about" className="nav-link">About Us</Link>
+            <Link to="/about" 
+              className="nav-link">
+                About Us
+            </Link>
           </NavItem>
         </Nav>
       </div>

@@ -43,7 +43,7 @@ const teamMembers = [
 
 function TeamMemberCard({ member }) {
   return (
-    <div className="card">
+    <div className="about-card">
       <img src={member.imageSrc} className="about-pic" alt={member.name} />
       <p
         style={{

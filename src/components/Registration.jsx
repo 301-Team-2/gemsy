@@ -4,15 +4,15 @@ import { useAuth0 } from '@auth0/auth0-react';
 function Register() {
   const { loginWithRedirect } = useAuth0();
 
-  const handleRegister = () => {
-    loginWithRedirect();
+  const handleSignUp = () => {
+    loginWithRedirect({ screen_hint: 'signup' });
   };
 
   return (
     <div>
-      <h2>Register</h2>
-      <p>Click the button below to register using Auth0</p>
-      <button onClick={handleRegister}>Register with Auth0</button>
+      <h2>Sign Up</h2>
+      <p>Click the button below to create an account using Auth0</p>
+      <button onClick={handleSignUp}>Sign Up with Auth0</button>
     </div>
   );
 }
