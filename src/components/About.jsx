@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 const teamMembers = [
   {
     name: 'Alejandra Altamirano',
-    imageSrc: 'src/assets/alejandra.png',
+    imageSrc: './assets/alejandra.png',
     githubLink: 'https://github.com/alejandraa0208',
     linkedinLink: 'https://www.linkedin.com/in/aaaltamirano/',
     bio: [
@@ -13,7 +13,7 @@ const teamMembers = [
   },
   {
     name: 'Joshua Shea',
-    imageSrc: 'src/assets/josh.png',
+    imageSrc: './assets/josh.png',
     githubLink: 'https://github.com/jshea44',
     linkedinLink: 'https://www.linkedin.com/in/joshshea44/',
     bio: [
@@ -22,7 +22,7 @@ const teamMembers = [
   },
   {
     name: 'Samaad Turner',
-    imageSrc: 'src/assets/samaad.png',
+    imageSrc: './assets/samaad.png',
     githubLink: 'https://github.com/SamaadTurner',
     linkedinLink: 'https://www.linkedin.com/in/samaad-turner/',
     bio: [
@@ -31,7 +31,7 @@ const teamMembers = [
   },
   {
     name: 'Sydney Mae Pagalan',
-    imageSrc: 'src/assets/sydney.jpg',
+    imageSrc: './assets/sydney.jpg',
     githubLink: 'https://github.com/sfpagalan',
     linkedinLink: 'https://www.linkedin.com/in/sfpagalan/',
     bio: [
