@@ -204,3 +204,12 @@ div.card ul {
   overflow-x: hidden;
   overflow-y: auto; 
 }
+
+h1.chat-title {
+  font-size: 20px;
+}
+
+.chatbox {
+  font-family: 'Quintessential', cursive;
+  text-align: center;
+}
