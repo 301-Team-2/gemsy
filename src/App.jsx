@@ -7,9 +7,9 @@ import {
   Route,
   Routes
 } from "react-router-dom";
+import { Auth0Provider } from "@auth0/auth0-react";
 import SearchDates from "./components/SearchDates";
 import Profile from "./components/Profile";
-import { Auth0Provider } from "@auth0/auth0-react";
 import About from "./components/About";
 import ChatGPT from "./components/ChatGPT";
 

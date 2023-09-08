@@ -6,7 +6,6 @@ function Logout() {
 
   return (
     <div>
-      {/* <h2>Logout from Gemsy</h2> */}
       <button onClick={() => logout()}>Logout from Gemsy</button>
     </div>
   );
