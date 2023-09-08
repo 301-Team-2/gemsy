@@ -6,7 +6,9 @@ function Logout() {
 
   return (
     <div>
-      <button onClick={() => logout()}>Logout from Gemsy</button>
+      
+      <button onClick={() => logout({ returnTo: 'https://gemsy.netlify.app'})}>Logout from Gemsy</button>
+
     </div>
   );
 }
