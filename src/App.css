@@ -66,6 +66,33 @@ span.navbar-brand {
 }
 
 /* main styles */
+div.search-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  max-width: 100%;
+}
+
+div.restaurants-search,
+div.events-search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 450px;
+}
+
+label {
+  font-family: 'Quintessential', cursive;
+  max-width: 450px;
+}
+
+input.location-input {
+  margin: 5px;
+  border-radius: 5px;
+  font-family: 'Quintessential', cursive;
+  max-width: 450px;
+}
+
 div.cards {
   display: flex;
   flex-wrap: wrap;
@@ -88,33 +115,35 @@ h2 {
   font-family: 'Great Vibes', cursive;
 }
 
-label {
-  font-family: 'Quintessential', cursive;
+div.card-title.h5 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 30px;
+  color: #404565;
 }
 
-input.location-input {
-  margin: 5px;
-  border-radius: 5px;
+p.card-text {
   font-family: 'Quintessential', cursive;
-}
-
-/* .search-bar {
-  max-width: 900px;
-  width: 400px;
-  height: 400px;
-  margin: 0 auto;
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-color: antiquewhite;
-} */
-
-/* .location-input {
+  font-size: 15px;
   margin-bottom: 5px;
-} */
+  color: #404565;
+}
+
+a.links {
+  margin-left: 3px;
+  background-image: none;
+  color: #404565;
+  text-decoration: none;
+  font-family: 'Quintessential', cursive;
+}
+
+a.links:hover {
+  color: #404565;
+  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  transition: background 0.3s;
+}
 
 /* img styles */
 img.about-pic {
@@ -140,13 +169,28 @@ img.card-img-top {
   align-self: center;
 }
 
-button {
+/* buttons style */
+button,
+button.seeMore-btn.btn.btn-primary,
+button.save-btn.btn.btn-primary {
   background-color: rgb(33, 37, 41);
   color: #e3d0e0;
+  border-color: rgb(33, 37, 41);
+}
+
+/* button.search-btn {
+  max-width: 200px;
+} */
+button.save-btn.btn.btn-primary {
+  margin-left: 5px;
 }
 
 .login-btn,
-.search-btn {
+.search-btn,
+.chat-btn,
+button.seeMore-btn.btn.btn-primary,
+button.save-btn.btn.btn-primary,
+button.sign-up {
   align-items: center;
   border: 0;
   border-radius: 8px;  
@@ -163,7 +207,11 @@ button {
 }
 
 .login-btn:hover,
-.search-btn:hover {
+.search-btn:hover,
+.chat-btn:hover,
+button.seeMore-btn.btn.btn-primary:hover,
+button.save-btn.btn.btn-primary:hover,
+button.sign-up:hover {
   background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
 }
 
@@ -195,14 +243,16 @@ div.card ul {
   margin: 0;
 }
 
-.chat-response {
-  padding: 50px;
+div.chat-response {
+  padding: 20px;
+  margin: 30px;
   border: 0;
-  border-radius: 8px;  
-  box-sizing: border-box;
-  border-color: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
-  overflow-x: hidden;
-  overflow-y: auto; 
+  border-radius: 8px;
+  font-family: 'Quintessential', cursive;
+  font-size: 15px;
+  color: #404565;
+  background-color: #e3d0e0;
+  text-align: left;
 }
 
 h1.chat-title {
@@ -211,5 +261,10 @@ h1.chat-title {
 
 .chatbox {
   font-family: 'Quintessential', cursive;
+  text-align: center;
+}
+
+.footer-text {
+  font-family: 'Henny Penny', cursive;
   text-align: center;
 }

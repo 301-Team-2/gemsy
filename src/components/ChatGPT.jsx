@@ -5,66 +5,54 @@ function ChatGPT(){
     const [searchPromptData, setSearchPromptData] = useState({ prompt: ''});
     const [promptResponse, setPromptResponse] = useState ('');
     const [isLoading, setIsloading] = useState(false);
-    const [error, setError] = useState(null);
-
 
     const handleSearch = async (e) => {
         e.preventDefault();
         setIsloading(true);
-      
-        // Check if the user's input contains keywords related to restaurants or locations
-        const userInput = searchPromptData.prompt.toLowerCase();
-        const isRestaurantRelated = userInput.includes('restaurant') || userInput.includes('food');
-        const isLocationRelated = userInput.includes('location') || userInput.includes('place');
-      
-        if (!isRestaurantRelated && !isLocationRelated) {
-          // Display an error message to the user
-          setError("Please enter a query related to restaurants or locations.");
-          setIsloading(false);
-          return;
-        }
-      
         try {
-          const chatApiUrl = `${import.meta.env.VITE_BACKEND_URL}/chat`;
-          const axiosResponse = await axios.get(chatApiUrl, {
-            params: {
-              message: searchPromptData.prompt,
-            },
-          });
-          setPromptResponse(axiosResponse.data);
-          setError(null); // Clear the error message on success
-        } catch (e) {
-          console.error('error:', e);
-          setError("An error occurred. Please try again."); // Set an error message on failure
-        } finally {
-          setIsloading(false);
+            const chatApiUrl = `${import.meta.env.VITE_BACKEND_URL}/chat`; // use this endpoint for chatgpt
+
+            const axiosResponse = await axios.get(chatApiUrl, {
+                    params: {
+                        message: searchPromptData.prompt,
+                    },
+                });
+            setPromptResponse(axiosResponse.data);
+        
+        }catch (e){
+            console.error('error:', e);
+
+        }finally{
+            setIsloading(false);
         }
-      };
-      
+    };
 
     return (
         <div className='chat-container'>
-            <h1 className='chat-title'> Want to know learn more about a location? Ask me anything...</h1>
+            <h1 className='chat-title'> Ask me anything...</h1>
             <div>
-                <textarea
+                <textarea 
                 className='chatbox'
                 rows="4" 
                 cols="50"
-                placeholder='type your question'
+                placeholder="Ask me a question like: Cafe in seattle and please include yelp links to the cafes and ratings. Be specific for better results."
                 value={searchPromptData.prompt}
                 onChange={(e) => setSearchPromptData({prompt: e.target.value})}
                 />
             </div>
-            <button onClick={handleSearch}>Search</button>
+            <button className='chat-btn' onClick={handleSearch}>Search</button>
             <div className='chat-response'> 
-                {isLoading ? 'Loading...' : promptResponse}
-                
+                {isLoading ? 'Loading...' : (
+                // Use <br> for line breaks and <ul>/<li> for lists
+                    <div>
+                        {promptResponse.split('\n').map((line, index) => (
+                        <p key={index}>{line}</p>
+                        ))}
+                    </div>
+                )}
             </div>
-        </div>
-        
+        </div> 
     )
-
-
 }
 
 

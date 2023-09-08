@@ -35,8 +35,8 @@ const teamMembers = [
     githubLink: 'https://github.com/sfpagalan',
     linkedinLink: 'https://www.linkedin.com/in/sfpagalan/',
     bio: [
-      'Navy Vet & Medical Assistant - Software Developer',
-      'Previous Experience: Work at Kaiser Permanente as an MA and served 6 years in the US Navy.',
+      'Navy Vet & Medical Assistant - Software Developer', 
+      'Worked at Kaiser Permanente as an MA and served 6 years in the US Navy.',
       'I am deeply passionate about the intersection of the medical field and technology, as well as my love for gaming.',
     ],
   },
@@ -56,8 +56,11 @@ function TeamMemberCard({ member }) {
       {member.bio && (
         <ul 
           style={{
+            width: '350px',
             fontSize: '15px', 
-            fontFamily: 'Quintessential, cursive' 
+            fontFamily: 'Quintessential, cursive',
+            listStyle: 'none',
+            padding: '0',
           }}
         >
           {member.bio.map((text, index) => (
@@ -66,38 +69,16 @@ function TeamMemberCard({ member }) {
         </ul>
       )}
       <div>
-        <span 
-          style={{ 
-            fontWeight: 'bold', 
-            fontSize: '20px', 
-            fontFamily: 'Quintessential, cursive' 
-          }}>
-          Links: 
-        </span>
         <a 
           href={member.githubLink} 
           className='links'
-          style={{ 
-            textDecoration: 'none', 
-            color: 'black', 
-            fontSize: '15px', 
-            fontFamily: 'Quintessential, cursive',
-            margin: '5px'
-          }} 
             target="_blank" 
             rel="noopener noreferrer">
-          GitHub
+          GitHub |
         </a>
         <a 
           href={member.linkedinLink} 
           className='links'
-          style={{ 
-            textDecoration: 'none', 
-            color: 'black', 
-            fontSize: '15px', 
-            fontFamily: 'Quintessential, cursive', 
-            margin: '5px' 
-          }} 
             target="_blank" 
             rel="noopener noreferrer">
           LinkedIn

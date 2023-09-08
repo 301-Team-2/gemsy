@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../App.css'
 import { Modal, Button, Card } from 'react-bootstrap';
 import { useAuth0 } from '@auth0/auth0-react';
-import { saveLocationToUser } from './userService';
+import { saveLocationToUser } from '../components/userService';
 
 
 function SearchDates() {
@@ -85,7 +86,8 @@ function SearchDates() {
               />
               <button 
                 className="search-btn" 
-                onClick={handleRestaurantSearch}>
+                onClick={handleRestaurantSearch}
+                >
                   Search Restaurants
               </button>
         </div>
@@ -103,7 +105,8 @@ function SearchDates() {
               />
               <button 
                 className="search-btn" 
-                onClick={handleEventSearch}>
+                onClick={handleEventSearch}
+              >
                 Search Events
               </button>
         </div>
@@ -120,9 +123,7 @@ function SearchDates() {
                       <Card.Img variant="top" src={restaurant.image_url} alt="restaurant-img" />
                       <Card.Body>
                         <Card.Title>
-                          <a href={restaurant.url} target="_blank" rel="noopener noreferrer">
-                            {restaurant.name}
-                          </a>
+                          {restaurant.name}
                         </Card.Title>
                         <Card.Text>
                           Rating: {restaurant.rating} | Price: {restaurant.price}
@@ -130,8 +131,16 @@ function SearchDates() {
                         <Card.Text>
                           Location: {restaurant.location}
                         </Card.Text>
+                        <Card.Text>
+                          <a className='links' href={restaurant.url} target="_blank" rel="noopener noreferrer"
+                          data-label='url'
+                          >
+                            Click Here for more info
+                          </a>
+                        </Card.Text>
                         {user && (
                           <Button
+                            className='save-btn'
                             variant="primary"
                             onClick={() => handleSaveLocation(restaurant.location)}
                           >
@@ -162,9 +171,21 @@ function SearchDates() {
                         <Card.Text>
                           End Time: {event.time_end}
                         </Card.Text>
-                        <Button variant="primary" onClick={() => openEventDetailsModal(event)}>See More</Button>
+                        <Button
+                          className='seeMore-btn'
+                          variant="primary"
+                          onClick={() => openEventDetailsModal(event)}
+                          >
+                            See More
+                        </Button>
                         {user && (
-                          <Button variant="primary" onClick={() => handleSaveLocation(event.location)}>Save Location</Button>
+                          <Button
+                            className='save-btn'
+                            variant="primary"
+                            onClick={() => handleSaveLocation(event.location)}
+                          >
+                            Save Location
+                          </Button>
                         )}
                       </Card.Body>
                     </Card>
@@ -187,7 +208,7 @@ function SearchDates() {
                 {selectedEvent.description}
               </p>
               <p>
-                <a href={selectedEvent.event_site_url} target="_blank" rel="noopener noreferrer">
+                <a className='links' href={selectedEvent.event_site_url} target="_blank" rel="noopener noreferrer" data-label='url'>
                   Click Here for the Event Link
                 </a>
               </p>
