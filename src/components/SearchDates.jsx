@@ -14,6 +14,9 @@ function SearchDates() {
   const [eventResults, setEventResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [isLoading, setIsloading] = useState(false);
+
+
 
   const openEventDetailsModal = (event) => {
     setSelectedEvent(event);
@@ -24,6 +27,7 @@ function SearchDates() {
   };
 
   const handleRestaurantSearch = async () => {
+    setIsloading(true);
     try {
       const restaurantApiUrl = `${import.meta.env.VITE_BACKEND_URL}/restaurants`;
       const restaurantResponse = await axios.get(restaurantApiUrl, {
@@ -37,10 +41,13 @@ function SearchDates() {
       setShowResults(true);
     } catch (error) {
       console.error('Error:', error);
+    }finally{
+      setIsloading(false);
     }
   };
   
   const handleEventSearch = async () => {
+      setIsloading(true);
     try {
       const eventApiUrl = `${import.meta.env.VITE_BACKEND_URL}/events`;
       const eventResponse = await axios.get(eventApiUrl, {
@@ -54,6 +61,8 @@ function SearchDates() {
       setShowResults(true);
     } catch (error) {
       console.error('Error:', error);
+    }finally{
+      setIsloading(false);
     }
   };
 
@@ -81,7 +90,7 @@ function SearchDates() {
                 type="text"
                 placeholder="Enter location"
                 value={restaurantSearchData.location}
-                onChange={(e) =>                  setRestaurantSearchData({ location: e.target.value })
+                onChange={(e) => setRestaurantSearchData({ location: e.target.value })
                 }
               />
               <button 
@@ -114,6 +123,7 @@ function SearchDates() {
 
       {showResults && (
         <>
+        {isLoading && 'Locating Resturants in Your Area...'}
           {restaurantResults.length > 0 && (
             <div className='show-restaurants'>
               <h2>Restaurants</h2>
@@ -153,7 +163,7 @@ function SearchDates() {
                 </div> 
             </div>
           )}
-
+          {isLoading && 'Locating Events in Your Area...'}
           {eventResults.length > 0 && (
             <div className='show-events'>
               <h2>Events</h2>
