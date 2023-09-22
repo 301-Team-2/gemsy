@@ -29,6 +29,10 @@
 
 ![Database Model](./ReadMePics/DatabaseModel.png)
 
+## Deployed Link 
+
+<https://newgemsy.netlify.app/>
+
 ## Lighthouse
 
 ![Lighthouse](insert img here)
